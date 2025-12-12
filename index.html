@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tetyana Ryasnykh | Photographer & Videographer</title>
+    <title>Tanya Ryasnykh | Photographer & Videographer</title>
     
     <!-- Google Fonts: Montserrat for a clean, editorial look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,11 +14,13 @@
         /* --- CSS VARIABLES & RESET --- */
         :root {
             /* Palette */
-            --bg-color: #FDFBF7;         /* Cream/Off-white */
-            --bg-cards: #F7F4EF;         /* Slightly darker beige */
-            --text-main: #2A2A2A;        /* Soft Black/Charcoal */
-            --text-muted: #6C6C6C;       /* Grey for secondary text */
-            --accent-line: #D1C7BD;      /* Taupe for fine lines */
+            --bg-color: #DED8D3;         /* Warm background */
+            --bg-cards: #F7F3EF;         /* Soft surface/card */
+            --card-surface: #F3ECE6;     /* Off-white warm card surface */
+            --text-main: #1E1A17;        /* Deep espresso text */
+            --text-muted: #7A6D63;       /* Warm muted text */
+            --accent-color: #4A301B;     /* Rich brown accent */
+            --border-color: rgba(58, 52, 47, 0.22);
             --white: #FFFFFF;
             
             /* Typography */
@@ -54,8 +56,12 @@
 
         a {
             text-decoration: none;
-            color: inherit;
+            color: var(--accent-color);
             transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-main);
         }
 
         img {
@@ -107,24 +113,25 @@
         }
 
         .btn-primary {
-            background-color: var(--text-main);
+            background-color: var(--accent-color);
             color: var(--white);
-            border: 1px solid var(--text-main);
+            border: 1px solid var(--accent-color);
         }
 
         .btn-primary:hover {
             background-color: transparent;
-            color: var(--text-main);
+            color: var(--accent-color);
         }
 
         .btn-secondary {
             background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--text-main);
+            color: var(--accent-color);
+            border: 1px solid var(--border-color);
         }
 
         .btn-secondary:hover {
-            background-color: var(--text-main);
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
             color: var(--white);
         }
 
@@ -134,10 +141,10 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(253, 251, 247, 0.95); /* Semi-transparent beige */
+            background: rgba(222, 216, 211, 0.95); /* Semi-transparent warm beige */
             backdrop-filter: blur(8px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border-color);
             padding: 20px 0;
         }
 
@@ -166,6 +173,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
+            color: var(--text-main);
         }
 
         .nav-links a::after {
@@ -175,7 +183,7 @@
             height: 1px;
             bottom: -4px;
             left: 0;
-            background-color: var(--text-main);
+            background-color: var(--accent-color);
             transition: width 0.3s ease;
         }
 
@@ -207,7 +215,7 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(253, 251, 247, 0.7); /* Beige overlay */
+            background: rgba(222, 216, 211, 0.75); /* Warm beige overlay */
         }
 
         .hero-content {
@@ -274,7 +282,7 @@
             width: 100%;
             height: 500px;
             background-color: var(--bg-cards);
-            border: 1px solid var(--accent-line);
+            border: 1px solid var(--border-color);
         }
 
         .about-img-wrapper img {
@@ -288,7 +296,7 @@
         /* --- SERVICES SECTION --- */
         #services {
             padding: var(--section-padding);
-            background-color: var(--bg-cards);
+            background-color: var(--bg-color);
         }
 
         .services-grid {
@@ -298,20 +306,21 @@
         }
 
         .service-card {
-            background: var(--bg-color);
+            background: var(--card-surface);
             padding: 40px 24px;
-            border: 1px solid transparent;
+            border: 1px solid var(--border-color);
             transition: all 0.3s var(--ease);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             min-height: 280px;
+            box-shadow: 0 10px 25px rgba(30, 26, 23, 0.08);
         }
 
         .service-card:hover {
             transform: translateY(-5px);
-            border-color: var(--accent-line);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 35px rgba(30, 26, 23, 0.12);
         }
 
         .service-card h3 {
@@ -331,7 +340,7 @@
             margin-top: auto;
             font-size: 0.9rem;
             font-weight: 500;
-            border-top: 1px solid var(--accent-line);
+            border-top: 1px solid var(--border-color);
             padding-top: 16px;
         }
 
@@ -369,7 +378,7 @@
         .portfolio-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.2);
+            background: rgba(30, 26, 23, 0.25);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -380,7 +389,7 @@
         /* --- CONTACT SECTION --- */
         #contact {
             padding: var(--section-padding);
-            border-top: 1px solid var(--accent-line);
+            border-top: 1px solid var(--border-color);
         }
 
         .contact-layout {
@@ -409,7 +418,7 @@
             padding: 12px 0;
             background: transparent;
             border: none;
-            border-bottom: 1px solid var(--accent-line);
+            border-bottom: 1px solid var(--border-color);
             font-family: var(--font-main);
             font-size: 1rem;
             color: var(--text-main);
@@ -419,7 +428,7 @@
         }
 
         .form-input:focus, .form-textarea:focus {
-            border-bottom-color: var(--text-main);
+            border-bottom-color: var(--accent-color);
         }
 
         .contact-info-block h4 {
@@ -447,7 +456,7 @@
         footer {
             padding: 40px 20px;
             background-color: var(--bg-cards);
-            border-top: 1px solid rgba(0,0,0,0.05);
+            border-top: 1px solid var(--border-color);
             text-align: center;
         }
 
@@ -519,7 +528,7 @@
         <div class="container hero-content">
             <div class="hero-text-block">
                 <span class="hero-label">Photography & Videography – Cannes</span>
-                <h1 class="hero-title">TETYANA RYASNYKH</h1>
+                <h1 class="hero-title">TANYA RYASNYKH</h1>
                 <p class="hero-tagline">
                     Documenting the quiet beauty of real life. Cinematic stories, honest portraits, and the timeless light of the French Riviera.
                 </p>
@@ -699,7 +708,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="container footer-content">
-            <p>&copy; 2023 TETYANA RYASNYKH — Photography & Videography</p>
+            <p>&copy; 2023 TANYA RYASNYKH — Photography & Videography</p>
             <p class="footer-tagline">"Capture moments worth remembering."</p>
         </div>
     </footer>
