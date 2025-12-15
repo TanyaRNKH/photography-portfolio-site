@@ -22,6 +22,7 @@
             --accent-color: #4A301B;     /* Rich brown accent */
             --border-color: rgba(58, 52, 47, 0.22);
             --white: #FFFFFF;
+            --about-portrait-focus: 60% 22%;
             
             /* Typography */
             --font-main: 'Montserrat', sans-serif;
@@ -314,7 +315,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: top center;
+            object-position: var(--about-portrait-focus);
             display: block;
             transition: transform 0.65s var(--ease), filter 0.65s var(--ease);
         }
