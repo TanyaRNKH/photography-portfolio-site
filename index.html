@@ -281,17 +281,47 @@
         .about-img-wrapper {
             position: relative;
             width: 100%;
-            height: 500px;
-            background-color: var(--bg-cards);
-            border: 1px solid var(--border-color);
+            height: 520px;
+            background-color: transparent;
+            border: none;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 25px 45px rgba(30, 26, 23, 0.15);
+            transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+        }
+
+        .about-img-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35), transparent 65%);
+            opacity: 0;
+            transition: opacity 0.6s var(--ease);
+            pointer-events: none;
+        }
+
+        .about-img-wrapper:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 35px 65px rgba(74, 48, 27, 0.25);
+        }
+
+        .about-img-wrapper:hover::before {
+            opacity: 1;
         }
 
         .about-img-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Inset the image slightly for a frame effect */
-            padding: 10px; 
+            object-position: top center;
+            display: block;
+            transition: transform 0.65s var(--ease), filter 0.65s var(--ease);
+        }
+
+        .about-img-wrapper:hover img {
+            transform: scale(1.03);
+            filter: brightness(1.05);
         }
 
         /* --- SERVICES SECTION --- */
