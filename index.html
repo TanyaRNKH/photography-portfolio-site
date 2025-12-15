@@ -207,7 +207,7 @@
             /* Placeholder Background - Replace 'hero.jpg' with your file */
             background-image: url('IMG_hero headline.jpg'); 
             background-size: cover;
-            background-position: center;
+            background-position: 95% center;
         }
 
         /* Overlay to ensure text readability on varied backgrounds */
@@ -228,10 +228,12 @@
             grid-template-columns: 1.2fr 1fr; /* Asymmetric layout */
             gap: 40px;
             align-items: center;
+            justify-content: flex-start;
         }
 
         .hero-text-block {
             padding-right: 20px;
+            max-width: 520px;
         }
 
         .hero-label {
@@ -274,9 +276,21 @@
             align-items: center;
         }
 
+        .about-text {
+            text-align: left;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
         .about-text p {
-            margin-bottom: 24px;
+            margin-bottom: 22px;
             font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .about-text .availability {
+            margin-top: 16px;
+            opacity: 0.9;
         }
 
         .about-img-wrapper {
@@ -376,6 +390,16 @@
             padding-top: 16px;
         }
 
+        .pricing-note {
+            margin-top: 32px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-align: left;
+            max-width: 520px;
+            font-style: italic;
+            white-space: nowrap;
+        }
+
         /* --- PORTFOLIO SECTION --- */
         #portfolio {
             padding: var(--section-padding);
@@ -383,39 +407,54 @@
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
         }
 
-        .portfolio-item {
+        .portfolio-tile {
             position: relative;
-            aspect-ratio: 4/5; /* Vertical portrait ratio */
             overflow: hidden;
-            background-color: var(--bg-cards);
+            border-radius: 18px;
+            min-height: 320px;
+            background: var(--bg-cards);
             cursor: pointer;
+            box-shadow: 0 25px 45px rgba(30, 26, 23, 0.12);
         }
 
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s var(--ease);
+        .portfolio-image {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
         }
 
-        .portfolio-item:hover img {
+        .portfolio-tile::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(30, 26, 23, 0.15) 0%, rgba(30, 26, 23, 0.6) 100%);
+            opacity: 0.8;
+            transition: opacity 0.4s var(--ease);
+        }
+
+        .portfolio-tile:hover .portfolio-image {
             transform: scale(1.05);
         }
 
-        /* Optional Overlay on hover */
-        .portfolio-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(30, 26, 23, 0.25);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .portfolio-tile:hover::after {
+            opacity: 0.65;
         }
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
+
+        .portfolio-info {
+            position: relative;
+            z-index: 2;
+            padding: 24px;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+            font-weight: 400;
         }
 
         /* --- CONTACT SECTION --- */
@@ -482,6 +521,31 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             margin-bottom: 4px;
+        }
+
+        .location-note {
+            margin-top: 6px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            transition: background-color 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+        }
+
+        .map-link:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-color: var(--accent-color);
         }
 
         /* --- FOOTER --- */
@@ -583,14 +647,12 @@
                         <h2 class="section-title">About Me</h2>
                     </div>
                     <p>
-                        I am a photographer and videographer based in the heart of Cannes. My work focuses on reportage, intimate portraits, and cinematic travel journals. I believe that the most powerful images are the ones that feel unscripted and authentic.
+                        Based in Cannes, I photograph and film people and places with a quiet, documentary approach. From intimate portraits and reportage to commercial campaigns, I focus on natural moments and thoughtful composition.
                     </p>
                     <p>
-                        Whether capturing a wedding on the Côte d’Azur, a commercial campaign, or a personal travel story, I chase the natural light and the honest moments in between poses.
+                        Drone and travel work are part of my toolkit when they help tell the story.
                     </p>
-                    <p>
-                        <strong>Available for:</strong> Local projects in France and destination assignments worldwide.
-                    </p>
+                    <p class="availability"><strong>Available for:</strong> Portrait sessions, brand shoots, events/reportage, and destination assignments.</p>
                 </div>
                 <div class="about-img-wrapper">
                     <!-- Placeholder Portrait -->
@@ -613,38 +675,39 @@
                 <div class="service-card">
                     <div>
                         <h3>Portraits</h3>
-                        <p class="service-desc">Editorial style portraits for individuals, couples, or artists. Focus on natural expressions.</p>
+                        <p class="service-desc">Editorial-style portraits for individuals, families, creatives, and small teams. Natural direction and honest expressions.</p>
                     </div>
-                    <div class="service-price">From €250</div>
+                    <div class="service-price">From €300</div>
                 </div>
 
                 <!-- Card 2 -->
                 <div class="service-card">
                     <div>
-                        <h3>Reportage</h3>
-                        <p class="service-desc">Events, weddings, and backstage coverage. Documentary approach, capturing the atmosphere.</p>
+                        <h3>Reportage &amp; Events</h3>
+                        <p class="service-desc">Documentary event coverage: backstage, brand stories, atmosphere, and details.</p>
                     </div>
-                    <div class="service-price">From €1,200</div>
+                    <div class="service-price">From €600</div>
                 </div>
 
                 <!-- Card 3 -->
                 <div class="service-card">
                     <div>
-                        <h3>Drone</h3>
-                        <p class="service-desc">Cinematic aerial photography and videography to add a new perspective to your project.</p>
+                        <h3>Commercial Content</h3>
+                        <p class="service-desc">Photo + video for brands: lifestyle, hospitality, products, and social content. Clean storytelling, consistent look.</p>
                     </div>
-                    <div class="service-price">From €350</div>
+                    <div class="service-price">On Request</div>
                 </div>
 
                 <!-- Card 4 -->
                 <div class="service-card">
                     <div>
-                        <h3>Travel & Projects</h3>
-                        <p class="service-desc">Personal commissions, travel journals, and artistic collaborations.</p>
+                        <h3>Drone (Licensed)</h3>
+                        <p class="service-desc">Cinematic aerial photo and video for brands, properties, events, and locations. Planned, safe, and permit-aware.</p>
                     </div>
-                    <div class="service-price">On Request</div>
+                    <div class="service-price">From €500</div>
                 </div>
             </div>
+            <p class="pricing-note">Prices are starting points. Every project is tailored, contact me for a personalised quote.</p>
         </div>
     </section>
 
@@ -657,35 +720,32 @@
             </div>
 
             <div class="portfolio-grid">
-                <!-- Item 1 -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Portrait Work">
-                    <div class="portfolio-overlay"></div>
+                <div
+                    class="portfolio-tile"
+                    data-gallery="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1504595403659-9088ce801e29?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1508723273083-6788a094b2d5?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&amp;fit=crop&amp;w=900&amp;q=80">
+                    <div class="portfolio-image" aria-hidden="true"></div>
+                    <div class="portfolio-info">Portraits</div>
                 </div>
-                <!-- Item 2 -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&fit=crop&w=600&q=80" alt="Reportage Wedding">
-                    <div class="portfolio-overlay"></div>
+
+                <div
+                    class="portfolio-tile"
+                    data-gallery="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&amp;fit=crop&amp;w=900&amp;q=80">
+                    <div class="portfolio-image" aria-hidden="true"></div>
+                    <div class="portfolio-info">Reportage &amp; Events</div>
                 </div>
-                <!-- Item 3 -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1473186578172-c141e6798cf4?auto=format&fit=crop&w=600&q=80" alt="Travel Landscape">
-                    <div class="portfolio-overlay"></div>
+
+                <div
+                    class="portfolio-tile"
+                    data-gallery="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&amp;fit=crop&amp;w=900&amp;q=80">
+                    <div class="portfolio-image" aria-hidden="true"></div>
+                    <div class="portfolio-info">Commercial</div>
                 </div>
-                <!-- Item 4 -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80" alt="Nature/Drone Vibe">
-                    <div class="portfolio-overlay"></div>
-                </div>
-                <!-- Item 5 -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=600&q=80" alt="Fashion Editorial">
-                    <div class="portfolio-overlay"></div>
-                </div>
-                <!-- Item 6 -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1502982720700-bfff97f2ecac?auto=format&fit=crop&w=600&q=80" alt="Film Photography">
-                    <div class="portfolio-overlay"></div>
+
+                <div
+                    class="portfolio-tile"
+                    data-gallery="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1500532001009-e69f4a3d2d4f?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1499084732479-de2c02d45fc4?auto=format&amp;fit=crop&amp;w=900&amp;q=80">
+                    <div class="portfolio-image" aria-hidden="true"></div>
+                    <div class="portfolio-info">Drone</div>
                 </div>
             </div>
         </div>
@@ -701,19 +761,20 @@
 
             <div class="contact-layout">
                 <!-- Contact Form -->
-                <form class="contact-form">
+                <form class="contact-form" action="https://formspree.io/f/xzznqdak" method="POST">
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" class="form-input" placeholder="John Doe">
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" class="form-input" placeholder="john@example.com">
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Email address" required>
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" rows="5" class="form-textarea" placeholder="Tell me about your project..."></textarea>
+                        <textarea id="message" name="message" rows="5" class="form-textarea" placeholder="Tell me about your project (date, location, deliverables)…" required></textarea>
                     </div>
+                    <input type="hidden" name="_subject" value="New inquiry from photography site">
                     <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Send Message</button>
                 </form>
 
@@ -723,14 +784,17 @@
                     <div class="info-item">
                         <strong>Location</strong>
                         Based in Cannes, France
+                        <p class="location-note">Available across the Côte d’Azur and for destination assignments.</p>
+                        <a class="map-link" href="https://www.google.com/maps?q=Cannes,+France" target="_blank" rel="noreferrer noopener">Open in Google Maps</a>
                     </div>
                     <div class="info-item">
                         <strong>Email</strong>
-                        <a href="mailto:hello@yourname.com">hello@yourname.com</a>
+                        <a href="mailto:contact@trvideo.net">contact@trvideo.net</a>
                     </div>
                     <div class="info-item">
                         <strong>Social</strong>
-                        <a href="#">@yourhandle</a>
+                        <a href="#" aria-label="Instagram profile">Instagram</a> ·
+                        <a href="#" aria-label="Vimeo profile">Vimeo</a>
                     </div>
                 </div>
             </div>
@@ -745,5 +809,66 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tiles = document.querySelectorAll('.portfolio-tile');
+
+            tiles.forEach((tile) => {
+                const gallery = (tile.dataset.gallery || '')
+                    .split('|')
+                    .map((url) => url.trim())
+                    .filter((url) => url.length > 0);
+
+                if (!gallery.length) return;
+
+                const imageLayer = tile.querySelector('.portfolio-image');
+                let currentIndex = 0;
+                let cycleInterval = null;
+
+                const setImage = (idx) => {
+                    imageLayer.style.backgroundImage = `url('${gallery[idx]}')`;
+                };
+
+                const startCycle = () => {
+                    if (gallery.length <= 1 || cycleInterval) return;
+                    cycleInterval = setInterval(() => {
+                        currentIndex = (currentIndex + 1) % gallery.length;
+                        setImage(currentIndex);
+                    }, 1600);
+                };
+
+                const stopCycle = () => {
+                    if (!cycleInterval) return;
+                    clearInterval(cycleInterval);
+                    cycleInterval = null;
+                    currentIndex = 0;
+                    setImage(currentIndex);
+                };
+
+                const advanceOnce = () => {
+                    if (gallery.length <= 1) return;
+                    currentIndex = (currentIndex + 1) % gallery.length;
+                    setImage(currentIndex);
+                };
+
+                setImage(0);
+
+                tile.addEventListener('mouseenter', startCycle);
+                tile.addEventListener('mouseleave', stopCycle);
+                tile.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    advanceOnce();
+                });
+                tile.addEventListener(
+                    'touchstart',
+                    (event) => {
+                        event.preventDefault();
+                        advanceOnce();
+                    },
+                    { passive: false }
+                );
+            });
+        });
+    </script>
 </body>
 </html>
