@@ -422,56 +422,115 @@
             padding: var(--section-padding);
         }
 
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
         }
 
-        .portfolio-tile {
-            position: relative;
-            overflow: hidden;
-            border-radius: 18px;
-            min-height: 320px;
-            background: var(--bg-cards);
+        .filter-btn {
+            border: none;
+            background: none;
+            font-family: var(--font-main);
+            font-size: 0.85rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-muted);
             cursor: pointer;
-            box-shadow: 0 25px 45px rgba(30, 26, 23, 0.12);
+            padding-bottom: 6px;
+            position: relative;
+            transition: color 0.3s;
         }
 
-        .portfolio-image {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
-        }
-
-        .portfolio-tile::after {
+        .filter-btn::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(30, 26, 23, 0.15) 0%, rgba(30, 26, 23, 0.6) 100%);
-            opacity: 0.8;
-            transition: opacity 0.4s var(--ease);
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--text-main);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
         }
 
-        .portfolio-tile:hover .portfolio-image {
-            transform: scale(1.05);
+        .filter-btn.active {
+            color: var(--text-main);
         }
 
-        .portfolio-tile:hover::after {
-            opacity: 0.65;
+        .filter-btn.active::after {
+            transform: scaleX(1);
         }
 
-        .portfolio-info {
+        .portfolio-gallery {
+            column-count: 3;
+            column-gap: 20px;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
             position: relative;
-            z-index: 2;
-            padding: 24px;
-            color: var(--white);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s, transform 0.4s;
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .gallery-item figcaption {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1.1rem;
-            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
         }
 
         /* --- CONTACT SECTION --- */
@@ -595,6 +654,7 @@
         @media (max-width: 1024px) {
             .hero-title { font-size: 3rem; }
             .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-gallery { column-count: 2; }
         }
 
         @media (max-width: 768px) {
@@ -620,7 +680,7 @@
             .about-img-wrapper { height: 400px; order: -1; /* Image on top on mobile */ }
 
             /* Portfolio */
-            .portfolio-grid { grid-template-columns: 1fr; }
+            .portfolio-gallery { column-count: 1; }
 
             /* Contact */
             .contact-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -746,36 +806,14 @@
                 <h2 class="section-title">Selected Work</h2>
                 <p class="section-subtitle">A collection of portraits, reportage, drone views, and travel stories.</p>
             </div>
-
-            <div class="portfolio-grid">
-                <div
-                    class="portfolio-tile"
-                    data-gallery="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1504595403659-9088ce801e29?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1508723273083-6788a094b2d5?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&amp;fit=crop&amp;w=900&amp;q=80">
-                    <div class="portfolio-image" aria-hidden="true"></div>
-                    <div class="portfolio-info">Portraits</div>
-                </div>
-
-                <div
-                    class="portfolio-tile"
-                    data-gallery="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&amp;fit=crop&amp;w=900&amp;q=80">
-                    <div class="portfolio-image" aria-hidden="true"></div>
-                    <div class="portfolio-info">Reportage &amp; Events</div>
-                </div>
-
-                <div
-                    class="portfolio-tile"
-                    data-gallery="commercial 1.jpg|commercial 2.jpg|commercial 3.jpg|commercial 4.jpg">
-                    <div class="portfolio-image" aria-hidden="true"></div>
-                    <div class="portfolio-info">Commercial</div>
-                </div>
-
-                <div
-                    class="portfolio-tile"
-                    data-gallery="drone section 1.jpg|drone section 2.jpg|drone section 3.jpg|drone section 4.jpg">
-                    <div class="portfolio-image" aria-hidden="true"></div>
-                    <div class="portfolio-info">Drone</div>
-                </div>
+            <div class="portfolio-filter">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="portraits">Portraits</button>
+                <button class="filter-btn" data-category="reportage">Reportage</button>
+                <button class="filter-btn" data-category="commercial">Commercial</button>
+                <button class="filter-btn" data-category="drone">Drone</button>
             </div>
+            <div class="portfolio-gallery" id="portfolioGallery"></div>
         </div>
     </section>
 
@@ -844,63 +882,167 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const tiles = document.querySelectorAll('.portfolio-tile');
+            const works = [
+                {
+                    id: 'por1',
+                    category: 'portraits',
+                    src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
+                    caption: 'Portrait Study',
+                    width: 900,
+                    height: 1200,
+                },
+                {
+                    id: 'por2',
+                    category: 'portraits',
+                    src: 'https://images.unsplash.com/photo-1508723273083-6788a094b2d5?auto=format&fit=crop&w=1200&q=80',
+                    caption: 'Evening Light',
+                    width: 900,
+                    height: 1350,
+                },
+                {
+                    id: 'rep1',
+                    category: 'reportage',
+                    src: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80',
+                    caption: 'Reportage Atmosphere',
+                    width: 1200,
+                    height: 800,
+                },
+                {
+                    id: 'rep2',
+                    category: 'reportage',
+                    src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
+                    caption: 'Backstage Moments',
+                    width: 1000,
+                    height: 1500,
+                },
+                {
+                    id: 'com1',
+                    category: 'commercial',
+                    src: 'commercial 1.jpg',
+                    caption: 'Campaign Editorial',
+                    width: 1200,
+                    height: 900,
+                },
+                {
+                    id: 'com2',
+                    category: 'commercial',
+                    src: 'commercial 2.jpg',
+                    caption: 'Brand Narrative',
+                    width: 1200,
+                    height: 1600,
+                },
+                {
+                    id: 'com3',
+                    category: 'commercial',
+                    src: 'commercial 3.jpg',
+                    caption: 'Lifestyle Still',
+                    width: 1200,
+                    height: 900,
+                },
+                {
+                    id: 'dr1',
+                    category: 'drone',
+                    src: 'drone section 1.jpg',
+                    caption: 'Azure Coastline',
+                    width: 1400,
+                    height: 933,
+                },
+                {
+                    id: 'dr2',
+                    category: 'drone',
+                    src: 'drone section 2.jpg',
+                    caption: 'Mountain Mist',
+                    width: 1200,
+                    height: 1600,
+                },
+                {
+                    id: 'dr3',
+                    category: 'drone',
+                    src: 'drone section 3.jpg',
+                    caption: 'Sunset Flight',
+                    width: 1600,
+                    height: 1100,
+                },
+            ];
 
-            tiles.forEach((tile) => {
-                const gallery = (tile.dataset.gallery || '')
-                    .split('|')
-                    .map((url) => url.trim())
-                    .filter((url) => url.length > 0);
+            const galleryEl = document.getElementById('portfolioGallery');
+            const filterButtons = document.querySelectorAll('.filter-btn');
 
-                if (!gallery.length) return;
+            const lightbox = document.createElement('div');
+            lightbox.className = 'lightbox';
+            lightbox.innerHTML = `
+                <button class="lightbox-close" aria-label="Close image">&times;</button>
+                <img src="" alt="">
+            `;
+            document.body.appendChild(lightbox);
+            const lightboxImg = lightbox.querySelector('img');
+            const lightboxClose = lightbox.querySelector('.lightbox-close');
 
-                const imageLayer = tile.querySelector('.portfolio-image');
-                let currentIndex = 0;
-                let cycleInterval = null;
+            const openLightbox = (src, alt) => {
+                lightboxImg.src = src;
+                lightboxImg.alt = alt || 'Full screen image';
+                lightbox.classList.add('active');
+            };
 
-                const setImage = (idx) => {
-                    imageLayer.style.backgroundImage = `url('${gallery[idx]}')`;
-                };
+            const closeLightbox = () => {
+                lightbox.classList.remove('active');
+                lightboxImg.src = '';
+            };
 
-                const startCycle = () => {
-                    if (gallery.length <= 1 || cycleInterval) return;
-                    cycleInterval = setInterval(() => {
-                        currentIndex = (currentIndex + 1) % gallery.length;
-                        setImage(currentIndex);
-                    }, 1600);
-                };
-
-                const stopCycle = () => {
-                    if (!cycleInterval) return;
-                    clearInterval(cycleInterval);
-                    cycleInterval = null;
-                    currentIndex = 0;
-                    setImage(currentIndex);
-                };
-
-                const advanceOnce = () => {
-                    if (gallery.length <= 1) return;
-                    currentIndex = (currentIndex + 1) % gallery.length;
-                    setImage(currentIndex);
-                };
-
-                setImage(0);
-
-                tile.addEventListener('mouseenter', startCycle);
-                tile.addEventListener('mouseleave', stopCycle);
-                tile.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    advanceOnce();
-                });
-                tile.addEventListener(
-                    'touchstart',
-                    (event) => {
-                        event.preventDefault();
-                        advanceOnce();
-                    },
-                    { passive: false }
-                );
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (event) => {
+                if (event.target === lightbox) {
+                    closeLightbox();
+                }
             });
+
+            const renderGallery = (filter = 'all') => {
+                if (!galleryEl) return;
+                galleryEl.innerHTML = '';
+
+                const filteredWorks =
+                    filter === 'all'
+                        ? works
+                        : works.filter((work) => work.category === filter);
+
+                filteredWorks.forEach((work, index) => {
+                    const figure = document.createElement('figure');
+                    figure.className = 'gallery-item';
+                    figure.style.transitionDelay = `${index * 60}ms`;
+
+                    const image = document.createElement('img');
+                    image.src = work.src;
+                    image.alt = work.caption;
+                    image.loading = 'lazy';
+                    if (work.width && work.height) {
+                        image.width = work.width;
+                        image.height = work.height;
+                    }
+
+                    const caption = document.createElement('figcaption');
+                    caption.textContent = work.caption;
+
+                    figure.appendChild(image);
+                    figure.appendChild(caption);
+                    figure.addEventListener('click', () => openLightbox(work.src, work.caption));
+                    galleryEl.appendChild(figure);
+
+                    requestAnimationFrame(() => {
+                        figure.classList.add('visible');
+                    });
+                });
+            };
+
+            filterButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    if (button.classList.contains('active')) return;
+                    filterButtons.forEach((btn) => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    renderGallery(button.dataset.category);
+                });
+            });
+
+            renderGallery('all');
 
             const yearEl = document.getElementById('year');
             if (yearEl) {
