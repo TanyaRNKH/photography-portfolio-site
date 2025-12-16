@@ -424,54 +424,55 @@
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
         }
 
         .portfolio-tile {
-            position: relative;
-            overflow: hidden;
-            border-radius: 18px;
-            min-height: 320px;
             background: var(--bg-cards);
-            cursor: pointer;
-            box-shadow: 0 25px 45px rgba(30, 26, 23, 0.12);
+            border-radius: 22px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            box-shadow: 0 20px 40px rgba(30, 26, 23, 0.08);
         }
 
-        .portfolio-image {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
+        .tile-collage {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: 36px;
+            grid-auto-flow: dense;
+            gap: 6px;
+            border-radius: 14px;
+            overflow: hidden;
         }
 
-        .portfolio-tile::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(30, 26, 23, 0.15) 0%, rgba(30, 26, 23, 0.6) 100%);
-            opacity: 0.8;
-            transition: opacity 0.4s var(--ease);
+        .tile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .portfolio-tile:hover .portfolio-image {
-            transform: scale(1.05);
-        }
+        .tile-span-3x4 { grid-column: span 3; grid-row: span 4; }
+        .tile-span-3x3 { grid-column: span 3; grid-row: span 3; }
+        .tile-span-2x4 { grid-column: span 2; grid-row: span 4; }
+        .tile-span-2x3 { grid-column: span 2; grid-row: span 3; }
+        .tile-span-4x3 { grid-column: span 4; grid-row: span 3; }
 
-        .portfolio-tile:hover::after {
-            opacity: 0.65;
-        }
-
-        .portfolio-info {
-            position: relative;
-            z-index: 2;
-            padding: 24px;
-            color: var(--white);
+        .portfolio-info h3 {
+            font-size: 1.05rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1.1rem;
-            font-weight: 400;
+            letter-spacing: 0.3em;
+            margin-bottom: 6px;
+        }
+
+        .portfolio-info p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
         }
 
         /* --- CONTACT SECTION --- */
@@ -748,32 +749,56 @@
             </div>
 
             <div class="portfolio-grid">
-                <div
-                    class="portfolio-tile"
-                    data-gallery="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1504595403659-9088ce801e29?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1508723273083-6788a094b2d5?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&amp;fit=crop&amp;w=900&amp;q=80">
-                    <div class="portfolio-image" aria-hidden="true"></div>
-                    <div class="portfolio-info">Portraits</div>
+                <div class="portfolio-tile">
+                    <div class="tile-collage">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Editorial portrait with natural light" class="tile-img tile-span-3x4">
+                        <img src="https://images.unsplash.com/photo-1504595403659-9088ce801e29?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Soft portrait at sunrise" class="tile-img tile-span-3x3">
+                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Motion portrait of a traveler" class="tile-img tile-span-2x4">
+                        <img src="https://images.unsplash.com/photo-1508723273083-6788a094b2d5?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Minimal fashion portrait" class="tile-img tile-span-4x3">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Portraits</h3>
+                        <p>Editorial portraits for artists, couples, and brands with a documentary tone.</p>
+                    </div>
                 </div>
 
-                <div
-                    class="portfolio-tile"
-                    data-gallery="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&amp;fit=crop&amp;w=900&amp;q=80|https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&amp;fit=crop&amp;w=900&amp;q=80">
-                    <div class="portfolio-image" aria-hidden="true"></div>
-                    <div class="portfolio-info">Reportage &amp; Events</div>
+                <div class="portfolio-tile">
+                    <div class="tile-collage">
+                        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Reportage crowd moment" class="tile-img tile-span-3x3">
+                        <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Backstage storytelling" class="tile-img tile-span-3x4">
+                        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Intimate reportage close-up" class="tile-img tile-span-2x3">
+                        <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Brand event ambience" class="tile-img tile-span-4x3">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Reportage &amp; Events</h3>
+                        <p>Atmospheric coverage of weddings, backstage stories, and destination celebrations.</p>
+                    </div>
                 </div>
 
-                <div
-                    class="portfolio-tile"
-                    data-gallery="commercial 1.jpg|commercial 2.jpg|commercial 3.jpg|commercial 4.jpg">
-                    <div class="portfolio-image" aria-hidden="true"></div>
-                    <div class="portfolio-info">Commercial</div>
+                <div class="portfolio-tile">
+                    <div class="tile-collage">
+                        <img src="commercial 1.jpg" alt="Commercial still 01" class="tile-img tile-span-3x4">
+                        <img src="commercial 2.jpg" alt="Commercial still 02" class="tile-img tile-span-2x4">
+                        <img src="commercial 3.jpg" alt="Commercial still 03" class="tile-img tile-span-4x3">
+                        <img src="commercial 4.jpg" alt="Commercial still 04" class="tile-img tile-span-3x3">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Commercial</h3>
+                        <p>Campaign imagery for lifestyle, hospitality, and boutique brands with a cinematic polish.</p>
+                    </div>
                 </div>
 
-                <div
-                    class="portfolio-tile"
-                    data-gallery="drone section 1.jpg|drone section 2.jpg|drone section 3.jpg|drone section 4.jpg">
-                    <div class="portfolio-image" aria-hidden="true"></div>
-                    <div class="portfolio-info">Drone</div>
+                <div class="portfolio-tile">
+                    <div class="tile-collage">
+                        <img src="drone section 1.jpg" alt="Drone vista 01" class="tile-img tile-span-4x3">
+                        <img src="drone section 2.jpg" alt="Drone vista 02" class="tile-img tile-span-2x4">
+                        <img src="drone section 3.jpg" alt="Drone vista 03" class="tile-img tile-span-3x4">
+                        <img src="drone section 4.jpg" alt="Drone vista 04" class="tile-img tile-span-3x3">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Drone</h3>
+                        <p>Licensed aerial coverage for resorts, architecture, and destination stories.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -844,64 +869,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const tiles = document.querySelectorAll('.portfolio-tile');
-
-            tiles.forEach((tile) => {
-                const gallery = (tile.dataset.gallery || '')
-                    .split('|')
-                    .map((url) => url.trim())
-                    .filter((url) => url.length > 0);
-
-                if (!gallery.length) return;
-
-                const imageLayer = tile.querySelector('.portfolio-image');
-                let currentIndex = 0;
-                let cycleInterval = null;
-
-                const setImage = (idx) => {
-                    imageLayer.style.backgroundImage = `url('${gallery[idx]}')`;
-                };
-
-                const startCycle = () => {
-                    if (gallery.length <= 1 || cycleInterval) return;
-                    cycleInterval = setInterval(() => {
-                        currentIndex = (currentIndex + 1) % gallery.length;
-                        setImage(currentIndex);
-                    }, 1600);
-                };
-
-                const stopCycle = () => {
-                    if (!cycleInterval) return;
-                    clearInterval(cycleInterval);
-                    cycleInterval = null;
-                    currentIndex = 0;
-                    setImage(currentIndex);
-                };
-
-                const advanceOnce = () => {
-                    if (gallery.length <= 1) return;
-                    currentIndex = (currentIndex + 1) % gallery.length;
-                    setImage(currentIndex);
-                };
-
-                setImage(0);
-
-                tile.addEventListener('mouseenter', startCycle);
-                tile.addEventListener('mouseleave', stopCycle);
-                tile.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    advanceOnce();
-                });
-                tile.addEventListener(
-                    'touchstart',
-                    (event) => {
-                        event.preventDefault();
-                        advanceOnce();
-                    },
-                    { passive: false }
-                );
-            });
-
             const yearEl = document.getElementById('year');
             if (yearEl) {
                 yearEl.textContent = new Date().getFullYear();
